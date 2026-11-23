@@ -1,0 +1,21 @@
+{
+  "bucket": {
+    "type": "choice",
+    "instructions": "Which bucket does this email belong in?",
+    "criteria": {
+      "alerts": "Automated system or security alerts",
+      "bills": "Invoices, receipts and payment notices",
+      "personal": "Messages from real people",
+      "junk": "Marketing and spam"
+    }
+  },
+  "page_now": {
+    "type": "noul",
+    "instructions": "Should the recipient be woken up for this?"
+  },
+  "urgency": {
+    "type": "score",
+    "instructions": "How urgent is this?",
+    "criteria": ["ignore", "today", "within an hour", "immediately"]
+  }
+}
