@@ -338,6 +338,11 @@ fn healthz(s: &Settings) -> Result<String, String> {
 }
 
 /// Read the state from --state, --state-file or stdin. A JSON object is sent as an object.
+///
+/// Run interactively with nothing piped in and no state flag, the question is asked on its
+/// own (empty state), e.g. `ouija noul "is the sky blue?"`. Empty input that *was* provided
+/// (an empty pipe or file) is still an error: in scripts that usually means something
+/// upstream failed.
 fn read_state(c: &Common) -> Result<Value, String> {
     let text = if let Some(s) = &c.state {
         s.clone()
@@ -345,7 +350,7 @@ fn read_state(c: &Common) -> Result<Value, String> {
         let bytes = std::fs::read(p).map_err(|e| format!("reading {p}: {e}"))?;
         String::from_utf8_lossy(&bytes).into_owned()
     } else if std::io::stdin().is_terminal() {
-        return Err("no state given: pipe it on stdin, or use --state / --state-file".to_string());
+        return Ok(Value::String(String::new()));
     } else {
         // Read bytes and convert lossily: truncated or Latin-1 input still works.
         let mut buf = Vec::new();

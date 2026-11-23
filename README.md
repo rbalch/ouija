@@ -117,7 +117,15 @@ server: ok (karpo-decision-31b)
 
 ## Usage
 
-State (the thing being judged) comes from stdin, or from `--state "text"`, or `--state-file PATH`. If it parses as a JSON object it is sent as an object, otherwise as a string.
+State (the thing being judged) comes from stdin, or from `--state "text"`, or `--state-file PATH`. If it parses as a JSON object it is sent as an object, otherwise as a string. Run from a terminal with nothing piped in, the question is asked on its own:
+
+```console
+$ ouija noul "is the sky blue?"
+true
+P(true)=0.999  conf 1.00  (290 ms)
+```
+
+Input that is provided but empty (an empty pipe or file, e.g. `git diff` with no changes) is an error, exit 3, because in a script that usually means something upstream went wrong.
 
 ### noul: yes or no
 
