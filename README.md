@@ -1,7 +1,3 @@
-<p align="center"><img src="assets/ouija-poster.jpg" alt="ouija" width="360"></p>
-
-<p align="center"><em>(artist's impression; the spirits don't actually take <code>--send</code>)</em></p>
-
 # ouija
 
 Ask the spirits a yes/no question from your shell. They answer in one breath, with probabilities, and without making anything up.
@@ -20,9 +16,13 @@ The answer goes to **stdout**, the evidence goes to **stderr**, and the verdict 
 
 ## What it is
 
+<img src="assets/ouija-poster.jpg" alt="ouija poster" title="Artist's impression. The spirits don't actually take --send." align="right" width="240">
+
 `ouija` is a small client for **System One decision models**. These models do not write text. One forward pass reads your input and returns a typed answer with probabilities: a yes/no (`noul`), one pick from a set of options (`choice`), or a rating on an ordered scale (`score`). A request takes about 300-400 ms for typical inputs, and there is no sampling, no prompt format to coax, and no output to parse.
 
 `ouija` works with any server that speaks the karpo-decision `/v1/systemone` API. The reference server is [github.com/machinepulse-ai/karpo-decision](https://github.com/machinepulse-ai/karpo-decision), serving the model [MachinePulseAI/karpo-decision-31B](https://huggingface.co/MachinePulseAI/karpo-decision-31B). Run it on a GPU box somewhere, point `ouija` at it, and every machine you own can ask it questions.
+
+<br clear="right">
 
 ## Install
 
